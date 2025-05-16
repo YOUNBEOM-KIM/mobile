@@ -7,20 +7,32 @@
 html, body {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  background-color: #000;
   font-family: 'Nanum Myeongjo', serif;
-  overflow: auto; /* 폴라로이드가 화면을 넘어가면 스크롤 가능 */
+}
+
+/* ✅ 캔버스: 고정된 비율 (9:16) */
+.canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 360px;
+  height: 640px;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  overflow: hidden;
+  background-color: transparent;
   position: relative;
 }
 
 /* 배경 이미지 */
 .background {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
   width: 100%;
   height: 100%;
   display: flex;
-  z-index: -1;
+  z-index: 0;
 }
 
 .left, .right {
@@ -39,40 +51,32 @@ html, body {
   background-image: url("images/background/background2.jpg");
 }
 
-/* 헤더 고정 */
+/* 헤더 텍스트 */
 .header {
   text-align: center;
-  padding: 30px 20px 10px;
+  padding: 20px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: white;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  z-index: 1;
   position: relative;
-  z-index: 10;
 }
 
 .subtext {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: 'Nanum Myeongjo', serif;
 }
 
-/* 폴라로이드 컨테이너: 전체 화면에 고정된 위치 배치 */
-.fixed-polaroid-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-}
-
-/* 각 폴라로이드는 절대 위치 배치 */
+/* 폴라로이드 고정 */
 .polaroid {
   position: absolute;
-  width: 28vw;
-  max-width: 180px;
+  width: 100px;
   background: white;
   border-radius: 8px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  padding: 10px;
-  z-index: 5;
+  padding: 8px;
+  z-index: 1;
 }
 
 .polaroid img {
@@ -82,19 +86,23 @@ html, body {
 }
 
 .message {
-  margin-top: 8px;
-  font-size: 0.85rem;
-  line-height: 1.4;
-  height: 70px;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  height: 60px;
   overflow-y: auto;
+  line-height: 1.4;
+  padding-right: 4px;
+}
+
+/* ✅ 반응형: 뷰포트 크기에 따라 캔버스 비율 유지 */
+@media (orientation: landscape) {
+  .canvas {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
 }
 
 @media (max-width: 480px) {
-  .polaroid {
-    width: 70vw;
-  }
-
-  .message {
-    font-size: 0.8rem;
+  .canvas {
+    transform: translate(-50%, -50%) scale(0.95);
   }
 }
