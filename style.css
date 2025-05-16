@@ -9,26 +9,18 @@ html, body {
   height: 100%;
   font-family: 'Nanum Myeongjo', serif;
   overflow: hidden;
-  background-color: #000;
+  position: relative;
 }
 
-/* ✅ 전체 캔버스: 화면 크기 + 고정 비율 유지 */
-.canvas {
+/* ✅ 배경을 화면 전체에 고정 */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
   width: 100vw;
   height: 100vh;
-  aspect-ratio: 9 / 16;
-  position: relative;
-  overflow: hidden;
-  background-color: transparent;
-}
-
-/* 배경 */
-.background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  z-index: 0;
+  z-index: -1;
 }
 
 .left, .right {
@@ -47,10 +39,10 @@ html, body {
   background-image: url("images/background/background2.jpg");
 }
 
-/* 헤더 */
+/* 헤더 고정 */
 .header {
-  position: absolute;
-  top: 5%;
+  position: fixed;
+  top: 5vh;
   width: 100%;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
@@ -66,10 +58,10 @@ html, body {
   margin-top: 4px;
 }
 
-/* 폴라로이드 */
+/* 공통 폴라로이드 스타일 */
 .polaroid {
-  position: absolute;
-  width: 18vw;
+  position: fixed;
+  width: 24vw;
   max-width: 120px;
   background: white;
   border-radius: 8px;
@@ -87,19 +79,47 @@ html, body {
 .message {
   margin-top: 6px;
   font-size: 1.2vh;
-  height: 7vh;
+  height: 8vh;
   overflow-y: auto;
   line-height: 1.3;
   padding-right: 4px;
 }
 
-/* 모바일 대응 */
-@media (max-width: 480px) {
-  .polaroid {
-    width: 28vw;
+/* ✅ 기본 위치: 세로 화면 기준 */
+.p1 {
+  top: 30vh;
+  left: 10vw;
+}
+
+.p2 {
+  top: 22vh;
+  left: 40vw;
+}
+
+.p3 {
+  top: 50vh;
+  left: 70vw;
+}
+
+/* ✅ 가로 화면일 때 위치 재지정 */
+@media (orientation: landscape) {
+  .p1 {
+    top: 20vh;
+    left: 20vw;
+  }
+
+  .p2 {
+    top: 30vh;
+    left: 45vw;
+  }
+
+  .p3 {
+    top: 40vh;
+    left: 70vw;
   }
 
   .message {
-    font-size: 1vh;
+    font-size: 1.0vh;
+    height: 6vh;
   }
 }
